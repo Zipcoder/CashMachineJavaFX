@@ -14,11 +14,19 @@ public class Bank {
 
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Example 1", "example1@gmail.com", 500
+                1000, "Action Jackson", "blamblam1@gmail.com", 10
         )));
 
         accounts.put(2000, new PremiumAccount(new AccountData(
-                2000, "Example 2", "example2@gmail.com", 200
+                2000, "Spawn", "spawny3@gmail.com", 20000
+        )));
+
+        accounts.put(3000, new PremiumAccount(new AccountData(
+                3000, "David", "Nice@gmail.com", 1000000
+        )));
+
+        accounts.put(4000, new PremiumAccount(new AccountData(
+                4000, "Simba", "woofwoof@gmail.com", 300000
         )));
     }
 
@@ -28,7 +36,7 @@ public class Bank {
         if (account != null) {
             return ActionResult.success(account.getAccountData());
         } else {
-            return ActionResult.fail("No account with id: " + id + "\nTry account 1000 or 2000");
+            return ActionResult.fail("No account with id: " + id + "\nEnter your account ID and then click submit");
         }
     }
 
