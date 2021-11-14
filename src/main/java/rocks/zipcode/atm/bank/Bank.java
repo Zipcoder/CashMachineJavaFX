@@ -14,7 +14,7 @@ public class Bank {
 
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Action Jackson", "blamblam1@gmail.com", 10
+                1000, "Action Jackson", "blamblam1@gmail.com", 300000
         )));
 
         accounts.put(2000, new PremiumAccount(new AccountData(

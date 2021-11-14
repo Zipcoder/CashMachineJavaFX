@@ -19,7 +19,7 @@ public abstract class Account {
        accountData = new AccountData (accountData.getId(), accountData.getName(), accountData.getEmail(), accountData.getBalance() + amount);
     }
 
-    public boolean withdraw(int amount) {
+    public boolean withdraw(float amount) {
         if (canWithdraw(amount)) {
             updateBalance((int) (getBalance() - amount));
             return true;
@@ -28,7 +28,7 @@ public abstract class Account {
         }
     }
 
-    protected boolean canWithdraw(int amount) {
+    protected boolean canWithdraw(float amount) {
         return accountData.getBalance() >= amount;
     }
 
@@ -36,7 +36,7 @@ public abstract class Account {
         return (int) accountData.getBalance();
     }
 
-    private void updateBalance(int newBalance) {
+    private void updateBalance(float newBalance) {
         accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),
                 newBalance);
     }
