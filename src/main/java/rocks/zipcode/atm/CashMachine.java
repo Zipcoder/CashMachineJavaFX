@@ -35,7 +35,18 @@ public class CashMachine {
         );
     }
 
-    public void deposit(int amount) {
+    public boolean userIsLoggedIn() {
+        //if account data is = null; means user is not logged in = false
+        //if account data is valid; true
+        if (accountData == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    public void deposit(float amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
@@ -44,7 +55,7 @@ public class CashMachine {
         }
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(float amount) {
         if (accountData != null) {
              tryCall(
                     () -> bank.withdraw(accountData, amount),

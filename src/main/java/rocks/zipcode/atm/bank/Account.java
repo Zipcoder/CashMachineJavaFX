@@ -3,6 +3,8 @@ package rocks.zipcode.atm.bank;
 /**
  * @author ZipCodeWilmington
  */
+
+
 public abstract class Account {
 
     private AccountData accountData;
@@ -15,13 +17,13 @@ public abstract class Account {
         return accountData;
     }
 
-    public void deposit(int amount) {
+    public void deposit(float amount) {
        accountData = new AccountData (accountData.getId(), accountData.getName(), accountData.getEmail(), accountData.getBalance() + amount);
     }
 
     public boolean withdraw(float amount) {
         if (canWithdraw(amount)) {
-            updateBalance((int) (getBalance() - amount));
+            updateBalance(((getBalance() - amount)));
             return true;
         } else {
             return false;

@@ -17,22 +17,28 @@ import javax.xml.soap.Text;
 /**
  * @author ZipCodeWilmington
  */
+
+//TODO
+    //not be able to withdraw or deposit negative numbers
+    //create a menu that shows all accounts available
+    //Login screen separate from the main menu
+
+
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private TextField txtLogIn = new TextField();
     private TextField txtDeposit = new TextField();
     private TextField txtWithDraw = new TextField();
+    private TextField  txtSeeAccounts = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
-
-
-
 
 
 
     private Parent createContent() {
 
         Button btnSubmit = new Button("Log-in");
+        Button btnSeeAccounts = new Button("Get Accounts");
         Button btnDeposit = new Button("Deposit");
         Button btnWithdraw = new Button("Withdraw");
         Button btnExit = new Button("Log-out");
@@ -40,6 +46,7 @@ public class CashMachineApp extends Application {
         btnWithdraw.setDisable(true);
         btnDeposit.setDisable(true);
         btnExit.setDisable(true);
+        btnSeeAccounts.setDisable(true);
 
 
         VBox vbox = new VBox(20);                   //spacing between the buttons
@@ -51,22 +58,29 @@ public class CashMachineApp extends Application {
         btnSubmit.setOnAction(e -> {
             int id = Integer.parseInt(txtLogIn.getText());
             cashMachine.login(id);
+            if(cashMachine.userIsLoggedIn()) { //reference the method in the cash machine app with the boolean condition
+                btnExit.setDisable(false);
+                btnDeposit.setDisable(false);
+                btnWithdraw.setDisable(false);
+                btnSubmit.setDisable(true);
+            }
             areaInfo.setText(cashMachine.toString());
-            btnExit.setDisable(false);
-            btnDeposit.setDisable(false);
-            btnWithdraw.setDisable(false);
-            btnSubmit.setDisable(true);
             clearTxtBoxes();
 
         });
 
 
 
-
         btnDeposit.setOnAction(e -> {
-            int amount = Integer.parseInt(txtDeposit.getText());
-            cashMachine.deposit(amount);
-            areaInfo.setText(cashMachine.toString());
+            Float amount = Float.parseFloat(txtDeposit.getText());
+
+            if(amount < 0){
+                areaInfo.setText("This is not a valid number!");
+            }
+            else {
+                cashMachine.deposit(amount);
+                areaInfo.setText(cashMachine.toString());
+            }
             clearTxtBoxes();
         });
 
@@ -74,10 +88,13 @@ public class CashMachineApp extends Application {
 
 
         btnWithdraw.setOnAction(e -> {
-            int amount = Integer.parseInt(txtWithDraw.getText());
+            Float amount = Float.parseFloat(txtWithDraw.getText()); //changed the Integer.parseInt -> Float
             cashMachine.withdraw(amount);
             if(cashMachine.getMsg() != "") {
                 areaInfo.setText(cashMachine.getMsg());
+            }
+            if(amount < 0){
+                areaInfo.setText("This is not a valid number!");
             }
             else{
                 areaInfo.setText(cashMachine.toString());
@@ -97,7 +114,6 @@ public class CashMachineApp extends Application {
             btnSubmit.setDisable(false);
             clearTxtBoxes();
         });
-
 
 
 
@@ -145,5 +161,7 @@ public class CashMachineApp extends Application {
         txtLogIn.clear();
 
     }
+
+
 
 }
