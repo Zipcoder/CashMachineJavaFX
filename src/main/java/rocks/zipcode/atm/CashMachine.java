@@ -23,7 +23,7 @@ public class CashMachine {
         accountData = data;
     };
 
-    public String getMsg(){
+    public String getMsg(){ //method to return the error msg on line 92
         return msg;
 
     }
@@ -35,7 +35,7 @@ public class CashMachine {
         );
     }
 
-    public boolean userIsLoggedIn() {
+    public boolean userIsLoggedIn() { //method to validate if the log-in id is valid
         //if account data is = null; means user is not logged in = false
         //if account data is valid; true
         if (accountData == null) {
@@ -75,6 +75,7 @@ public class CashMachine {
     public String toString() {
         return accountData != null ? accountData.toString() : "Log-in with your account ID.";
     }
+
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
 

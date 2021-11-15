@@ -19,7 +19,6 @@ import javax.xml.soap.Text;
  */
 
 //TODO
-    //not be able to withdraw or deposit negative numbers
     //create a menu that shows all accounts available
     //Login screen separate from the main menu
 
@@ -30,7 +29,7 @@ public class CashMachineApp extends Application {
     private TextField txtLogIn = new TextField();
     private TextField txtDeposit = new TextField();
     private TextField txtWithDraw = new TextField();
-    private TextField  txtSeeAccounts = new TextField();
+    private TextField  txtSeeAccounts = new TextField(); //creation of a see all accounts?
     private CashMachine cashMachine = new CashMachine(new Bank());
 
 
@@ -70,11 +69,10 @@ public class CashMachineApp extends Application {
         });
 
 
-
         btnDeposit.setOnAction(e -> {
-            Float amount = Float.parseFloat(txtDeposit.getText());
+            Float amount = Float.parseFloat(txtDeposit.getText()); //changed the Integer.parseInt -> Float.parseFloat
 
-            if(amount < 0){
+            if(amount < 0){  //if statement to validate negative numbers input
                 areaInfo.setText("This is not a valid number!");
             }
             else {
@@ -88,12 +86,12 @@ public class CashMachineApp extends Application {
 
 
         btnWithdraw.setOnAction(e -> {
-            Float amount = Float.parseFloat(txtWithDraw.getText()); //changed the Integer.parseInt -> Float
+            Float amount = Float.parseFloat(txtWithDraw.getText()); //changed the Integer.parseInt -> Float.parseFloat; to change the deposit
             cashMachine.withdraw(amount);
             if(cashMachine.getMsg() != "") {
                 areaInfo.setText(cashMachine.getMsg());
             }
-            if(amount < 0){
+            if(amount < 0){ //added this to show invalid number for negatives - but it stopped showing error when trying to overdraft??!
                 areaInfo.setText("This is not a valid number!");
             }
             else{

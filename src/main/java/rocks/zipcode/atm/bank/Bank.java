@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Bank {
 
-    private Map<Integer, Account> accounts = new HashMap<>();
+    private Map<Integer, Account> accounts = new HashMap<>(); //use to create a collection to show all the accounts
 
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
