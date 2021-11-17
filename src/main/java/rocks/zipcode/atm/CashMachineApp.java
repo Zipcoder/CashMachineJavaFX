@@ -64,9 +64,12 @@ public class CashMachineApp extends Application {
 
 
         btnDeposit.setOnAction(e -> {
-            int amount = Integer.parseInt(txtDeposit.getText());
+            Float amount = Float.parseFloat(txtDeposit.getText());
             cashMachine.deposit(amount);
             areaInfo.setText(cashMachine.toString());
+            if(amount < 0) {
+                areaInfo.setText("this is not a valid number!");
+            }
             clearTxtBoxes();
         });
 
@@ -74,13 +77,14 @@ public class CashMachineApp extends Application {
 
 
         btnWithdraw.setOnAction(e -> {
-            int amount = Integer.parseInt(txtWithDraw.getText());
+            Float amount = Float.parseFloat(txtWithDraw.getText());
             cashMachine.withdraw(amount);
             if(cashMachine.getMsg() != "") {
                 areaInfo.setText(cashMachine.getMsg());
+
             }
             else{
-                areaInfo.setText(cashMachine.toString());
+                areaInfo.setText( "This is not a valid number!");
             }
 
             clearTxtBoxes();

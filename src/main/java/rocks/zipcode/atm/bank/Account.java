@@ -15,11 +15,11 @@ public abstract class Account {
         return accountData;
     }
 
-    public void deposit(int amount) {
+    public void deposit(Float amount) {
        accountData = new AccountData (accountData.getId(), accountData.getName(), accountData.getEmail(), accountData.getBalance() + amount);
     }
 
-    public boolean withdraw(float amount) {
+    public boolean withdraw(Float amount) {
         if (canWithdraw(amount)) {
             updateBalance((int) (getBalance() - amount));
             return true;
