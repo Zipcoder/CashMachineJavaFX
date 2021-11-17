@@ -1,5 +1,6 @@
 package rocks.zipcode.atm;
 
+import javafx.scene.control.TextField;
 import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
 
@@ -22,14 +23,15 @@ public class CashMachine {
         accountData = data;
     };
 
-    public void login(int id) {
+    public Object login(int id) {
         tryCall(
                 () -> bank.getAccountById(id),
                 update
         );
+        return null;
     }
 
-    public void deposit(int amount) {
+    public void deposit(Float amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
@@ -38,11 +40,12 @@ public class CashMachine {
         }
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(Float amount) {
         if (accountData != null) {
             tryCall(
-                    () -> bank.withdraw(accountData, amount),
+                    () -> bank.withdraw(accountData,amount),
                     update
+
             );
         }
     }
@@ -55,7 +58,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
+        return accountData != null ? accountData.toString() : "Cleared";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
@@ -72,4 +75,6 @@ public class CashMachine {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
 }
+

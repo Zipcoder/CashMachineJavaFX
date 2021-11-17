@@ -3,6 +3,7 @@ package rocks.zipcode.atm.bank;
 import rocks.zipcode.atm.ActionResult;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,12 +14,19 @@ public class Bank {
     private Map<Integer, Account> accounts = new HashMap<>();
 
     public Bank() {
-        accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Example 1", "example1@gmail.com", 500
+        accounts.put(10, new BasicAccount(new AccountData(
+                10,"Basic","Bruce Wayne", "brucewayne.wayneenterprises@google.com", 1045658.89f
         )));
 
-        accounts.put(2000, new PremiumAccount(new AccountData(
-                2000, "Example 2", "example2@gmail.com", 200
+        accounts.put(20, new PremiumAccount(new AccountData(
+                20, "Premium","Clark Kent" , "clarkkent.dailyplanet@gmail.com", 51456.58f
+        )));
+        accounts.put(30, new BasicAccount(new AccountData(
+                30, "Basic", "Steve Rogers", "steveRogers1.@army.mil", 23423479.23f
+        )));
+        accounts.put(40, new PremiumAccount(new AccountData(
+                40, "Premium", "Peter Parker", "peterparker@midtownhigh.edu", 1232146f
+
         )));
     }
 
@@ -27,19 +35,20 @@ public class Bank {
 
         if (account != null) {
             return ActionResult.success(account.getAccountData());
+
         } else {
-            return ActionResult.fail("No account with id: " + id + "\nTry account 1000 or 2000");
+            return ActionResult.fail("No account with id: " + id + "\nPlease input account numbers 10, 20, 30, 40");
         }
     }
 
-    public ActionResult<AccountData> deposit(AccountData accountData, int amount) {
-        Account account = accounts.get(accountData.getId());
-        account.deposit(amount);
+    public ActionResult<AccountData> deposit(AccountData accountData, Float amount) {
+            Account account = accounts.get(accountData.getId());
+            account.deposit(amount);
 
-        return ActionResult.success(account.getAccountData());
+                return ActionResult.success(account.getAccountData());
     }
 
-    public ActionResult<AccountData> withdraw(AccountData accountData, int amount) {
+    public ActionResult<AccountData> withdraw(AccountData accountData, Float amount) {
         Account account = accounts.get(accountData.getId());
         boolean ok = account.withdraw(amount);
 
@@ -48,5 +57,11 @@ public class Bank {
         } else {
             return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
         }
+
+    }
+
+    public Map<Integer, Account> getAccounts() {
+        return accounts;
     }
 }
+
